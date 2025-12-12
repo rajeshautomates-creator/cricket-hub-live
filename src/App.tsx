@@ -15,6 +15,9 @@ import Tournaments from "./pages/Tournaments";
 import CreateTournament from "./pages/CreateTournament";
 import Subscribe from "./pages/Subscribe";
 import SuperAdminDashboard from "./pages/SuperAdminDashboard";
+import SuperAdminSettings from "./pages/superadmin/Settings";
+import SuperAdminUsers from "./pages/superadmin/Users";
+import CreateAdmin from "./pages/superadmin/CreateAdmin";
 import Teams from "./pages/Teams";
 import Players from "./pages/Players";
 import ScheduleMatch from "./pages/ScheduleMatch";
@@ -89,6 +92,21 @@ const App = () => (
             <Route path="/superadmin" element={
               <ProtectedRoute requiredRole="superadmin">
                 <SuperAdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/superadmin/settings" element={
+              <ProtectedRoute requiredRole="superadmin">
+                <SuperAdminSettings />
+              </ProtectedRoute>
+            } />
+            <Route path="/superadmin/users" element={
+              <ProtectedRoute requiredRole="superadmin">
+                <SuperAdminUsers />
+              </ProtectedRoute>
+            } />
+            <Route path="/superadmin/create-admin" element={
+              <ProtectedRoute requiredRole="superadmin">
+                <CreateAdmin />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />

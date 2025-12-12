@@ -19,10 +19,10 @@ const Subscribe = () => {
       return;
     }
 
-    // Payment integration required - show coming soon message
+    // Payment integration coming soon
     toast({
-      title: 'Payment Integration Required',
-      description: 'Stripe/Razorpay payment integration needs to be configured by the administrator. Please contact support.',
+      title: 'Coming Soon!',
+      description: 'Payment integration will be available soon. Stay tuned!',
     });
   };
 

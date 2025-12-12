@@ -27,9 +27,7 @@ const Signup = () => {
     setLoading(true);
     const { error } = await signUp(email, password, name);
     setLoading(false);
-    if (!error) {
-      navigate('/login');
-    }
+    // Don't navigate - user should see success message and login
   };
 
   const passwordRequirements = [

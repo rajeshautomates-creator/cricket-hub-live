@@ -31,10 +31,10 @@ const ProtectedRoute = ({
 
   if (requiredRole) {
     if (requiredRole === 'superadmin' && !isSuperAdmin) {
-      return <Navigate to="/dashboard" replace />;
+      return <Navigate to="/matches" replace />;
     }
     if (requiredRole === 'admin' && !isAdmin) {
-      return <Navigate to="/dashboard" replace />;
+      return <Navigate to="/matches" replace />;
     }
   }
 
