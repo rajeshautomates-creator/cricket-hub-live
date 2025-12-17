@@ -1,23 +1,21 @@
-"use client";
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Check, Crown, Zap, Eye, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 const Subscribe = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleSubscribe = async () => {
     if (!user) {
-      router.push('/login');
+      navigate('/login');
       return;
     }
 
@@ -42,7 +40,7 @@ const Subscribe = () => {
       <header className="bg-card border-b border-border p-4">
         <div className="container mx-auto flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
-            <Link href="/matches"><ArrowLeft className="w-5 h-5" /></Link>
+            <Link to="/matches"><ArrowLeft className="w-5 h-5" /></Link>
           </Button>
           <div>
             <h1 className="font-display text-xl">SUBSCRIBE</h1>
@@ -61,7 +59,7 @@ const Subscribe = () => {
           <div className="bg-gradient-card border border-border rounded-3xl p-8 text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-accent/20 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
-
+            
             <div className="relative z-10">
               <div className="w-16 h-16 bg-gradient-accent rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <Crown className="w-8 h-8 text-accent-foreground" />

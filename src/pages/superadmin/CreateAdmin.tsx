@@ -1,9 +1,6 @@
-"use client";
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -31,7 +28,7 @@ const CreateAdmin = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const passwordRequirements = [
     { label: "At least 8 characters", met: password.length >= 8 },
@@ -102,7 +99,7 @@ const CreateAdmin = () => {
     }
 
     setLoading(false);
-    router.push('/superadmin/users');
+    navigate('/superadmin/users');
   };
 
   return (
@@ -111,7 +108,7 @@ const CreateAdmin = () => {
       <header className="border-b border-border bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/superadmin">
+            <Link to="/superadmin">
               <Button variant="ghost" size="icon">
                 <ArrowLeft className="w-5 h-5" />
               </Button>

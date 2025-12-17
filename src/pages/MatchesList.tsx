@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -67,7 +65,7 @@ const MatchesList = () => {
               </div>
               {isAdmin && (
                 <Button variant="hero" asChild>
-                  <Link href="/schedule-match"><Plus className="w-5 h-5 mr-2" />Schedule Match</Link>
+                  <Link to="/schedule-match"><Plus className="w-5 h-5 mr-2" />Schedule Match</Link>
                 </Button>
               )}
             </div>
@@ -133,16 +131,16 @@ const MatchesList = () => {
                       <div className="mt-4">
                         {canViewLive ? (
                           <Button variant="hero" size="sm" className="w-full" asChild>
-                            <Link href={`/live-scoring/${match.id}`}><Play className="w-4 h-4 mr-2" />{isAdmin ? 'Score Match' : 'Watch Live'}</Link>
+                            <Link to={`/live-scoring/${match.id}`}><Play className="w-4 h-4 mr-2" />{isAdmin ? 'Score Match' : 'Watch Live'}</Link>
                           </Button>
                         ) : (
-                          <Button variant="outline" size="sm" className="w-full" asChild><Link href="/subscribe">Subscribe to Watch</Link></Button>
+                          <Button variant="outline" size="sm" className="w-full" asChild><Link to="/subscribe">Subscribe to Watch</Link></Button>
                         )}
                       </div>
                     )}
                     {match.status === 'upcoming' && isAdmin && (
                       <Button variant="outline" size="sm" className="w-full mt-4" asChild>
-                        <Link href={`/live-scoring/${match.id}`}><Play className="w-4 h-4 mr-2" />Start Match</Link>
+                        <Link to={`/live-scoring/${match.id}`}><Play className="w-4 h-4 mr-2" />Start Match</Link>
                       </Button>
                     )}
                   </motion.div>

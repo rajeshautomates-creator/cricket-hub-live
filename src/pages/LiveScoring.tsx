@@ -1,19 +1,15 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, RotateCcw, AlertCircle, CircleDot, RefreshCw } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { Link, useParams } from "react-router-dom";
 import { useRealtimeScores } from "@/hooks/useRealtimeScores";
 import { useToast } from "@/hooks/use-toast";
 import { getStoredData, MockMatch, MockTeam, MockTournament, initialMatches, initialTeams, initialTournaments } from "@/lib/mockData";
 
 const LiveScoring = () => {
-  const params = useParams();
-  const matchId = params?.matchId as string;
+  const { matchId } = useParams();
   const { score, loading, addBall } = useRealtimeScores(matchId || null);
   const [match, setMatch] = useState<any>(null);
   const [currentOver, setCurrentOver] = useState<string[]>([]);
@@ -53,7 +49,7 @@ const LiveScoring = () => {
       <header className="bg-card border-b border-border p-4">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" asChild><Link href="/matches"><ArrowLeft className="w-5 h-5" /></Link></Button>
+            <Button variant="ghost" size="icon" asChild><Link to="/matches"><ArrowLeft className="w-5 h-5" /></Link></Button>
             <div><div className="text-sm text-muted-foreground">{match?.tournament?.name || 'Tournament'}</div><div className="font-display text-xl">{match?.team_a?.short_name || 'Team A'} vs {match?.team_b?.short_name || 'Team B'}</div></div>
           </div>
           <Badge className="bg-gradient-live text-live-foreground border-0 animate-pulse-live"><CircleDot className="w-3 h-3 mr-1" />LIVE</Badge>

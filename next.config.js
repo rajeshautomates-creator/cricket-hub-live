@@ -1,17 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['localhost'],
     unoptimized: true,
   },
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-  },
+  // Preserve existing path aliases
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, './src'),
     };
     return config;
   },

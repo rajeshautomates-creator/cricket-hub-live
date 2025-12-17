@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -89,7 +87,7 @@ const SuperAdminDashboard = () => {
     const { data: subscriptions } = await supabase
       .from('viewer_subscriptions')
       .select('amount');
-
+    
     const { data: purchases } = await supabase
       .from('admin_purchases')
       .select('amount')
@@ -119,7 +117,7 @@ const SuperAdminDashboard = () => {
     }
 
     const userIds = roles.map(r => r.user_id);
-
+    
     const { data: profiles } = await supabase
       .from('profiles')
       .select('*')
@@ -186,7 +184,7 @@ const SuperAdminDashboard = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-card border-r border-border hidden lg:block">
         <div className="p-6">
-          <Link href="/" className="flex items-center gap-2 mb-8">
+          <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 bg-gradient-live rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-live-foreground" />
             </div>
@@ -204,11 +202,12 @@ const SuperAdminDashboard = () => {
             ].map((item) => (
               <Link
                 key={item.label}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${item.active
+                to={item.href}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                  item.active
                     ? 'bg-live text-live-foreground'
                     : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
-                  }`}
+                }`}
               >
                 <item.icon className="w-5 h-5" />
                 <span>{item.label}</span>
@@ -347,7 +346,7 @@ const SuperAdminDashboard = () => {
                 ].map((action) => (
                   <Link
                     key={action.label}
-                    href={action.href}
+                    to={action.href}
                     className="flex flex-col items-center gap-3 p-6 rounded-xl bg-secondary hover:bg-muted transition-colors"
                   >
                     <div className={`w-12 h-12 ${action.color} rounded-xl flex items-center justify-center`}>

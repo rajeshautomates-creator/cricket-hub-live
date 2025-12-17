@@ -1,16 +1,13 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Trophy,
-  Users,
-  Calendar,
-  BarChart3,
-  Plus,
+import { 
+  Trophy, 
+  Users, 
+  Calendar, 
+  BarChart3, 
+  Plus, 
   Play,
   ChevronRight,
   Settings,
@@ -18,11 +15,11 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useStats } from "@/hooks/useMockData";
-import {
-  getStoredData,
-  MockMatch,
-  MockTeam,
-  MockTournament,
+import { 
+  getStoredData, 
+  MockMatch, 
+  MockTeam, 
+  MockTournament, 
   MockMatchScore,
   initialMatches,
   initialTeams,
@@ -33,7 +30,7 @@ import {
 const Dashboard = () => {
   const [recentMatches, setRecentMatches] = useState<any[]>([]);
   const { signOut, user, isAdmin } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const stats = useStats(user?.id);
 
   useEffect(() => {
@@ -67,7 +64,7 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/');
+    navigate('/');
   };
 
   const statCards = [
@@ -82,7 +79,7 @@ const Dashboard = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-card border-r border-border hidden lg:block relative">
         <div className="p-6">
-          <Link href="/" className="flex items-center gap-2 mb-8">
+          <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center">
               <span className="font-display text-2xl text-accent-foreground">C</span>
             </div>
@@ -99,11 +96,12 @@ const Dashboard = () => {
             ].map((item) => (
               <Link
                 key={item.label}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${item.active
-                    ? "bg-primary text-primary-foreground"
+                to={item.href}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                  item.active 
+                    ? "bg-primary text-primary-foreground" 
                     : "text-muted-foreground hover:text-foreground hover:bg-secondary"
-                  }`}
+                }`}
               >
                 <item.icon className="w-5 h-5" />
                 <span>{item.label}</span>
@@ -113,8 +111,8 @@ const Dashboard = () => {
         </div>
 
         <div className="absolute bottom-0 left-0 w-64 p-6 border-t border-border">
-          <Button
-            variant="ghost"
+          <Button 
+            variant="ghost" 
             className="w-full justify-start text-muted-foreground"
             onClick={handleSignOut}
           >
@@ -138,7 +136,7 @@ const Dashboard = () => {
               <p className="text-muted-foreground">Welcome back, {user?.full_name || 'Admin'}</p>
             </div>
             <Button variant="hero" asChild>
-              <Link href="/dashboard/tournaments/new">
+              <Link to="/dashboard/tournaments/new">
                 <Plus className="w-5 h-5 mr-2" />
                 New Tournament
               </Link>
@@ -178,7 +176,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-display text-2xl">RECENT MATCHES</h2>
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/matches">
+                  <Link to="/matches">
                     View All <ChevronRight className="w-4 h-4 ml-1" />
                   </Link>
                 </Button>
@@ -238,7 +236,7 @@ const Dashboard = () => {
                 ].map((action) => (
                   <Link
                     key={action.label}
-                    href={action.href}
+                    to={action.href}
                     className="flex flex-col items-center gap-3 p-6 rounded-xl bg-secondary hover:bg-muted transition-colors"
                   >
                     <div className={`w-12 h-12 ${action.color} rounded-xl flex items-center justify-center`}>

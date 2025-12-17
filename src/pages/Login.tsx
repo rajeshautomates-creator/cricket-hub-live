@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,19 +13,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { signIn, user, role } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && role) {
       if (role === 'superadmin') {
-        router.push('/superadmin');
+        navigate('/superadmin');
       } else if (role === 'admin') {
-        router.push('/dashboard');
+        navigate('/dashboard');
       } else {
-        router.push('/matches');
+        navigate('/matches');
       }
     }
-  }, [user, role, router]);
+  }, [user, role, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +45,7 @@ const Login = () => {
           className="w-full max-w-md"
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 mb-8">
+          <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center">
               <span className="font-display text-2xl text-accent-foreground">C</span>
             </div>
@@ -80,7 +79,7 @@ const Login = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <Link href="/forgot-password" className="text-sm text-accent hover:underline">
+                <Link to="/forgot-password" className="text-sm text-accent hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -113,7 +112,7 @@ const Login = () => {
           {/* Sign Up Link */}
           <p className="text-center text-sm text-muted-foreground mt-8">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-accent hover:underline font-medium">
+            <Link to="/signup" className="text-accent hover:underline font-medium">
               Sign up
             </Link>
           </p>
@@ -125,7 +124,7 @@ const Login = () => {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

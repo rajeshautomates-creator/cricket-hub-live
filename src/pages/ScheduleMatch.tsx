@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -20,7 +18,7 @@ const ScheduleMatch = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
-  const router = useRouter();
+  const navigate = useNavigate();
   const [match, setMatch] = useState({ tournament_id: '', team_a_id: '', team_b_id: '', match_date: '', match_time: '', venue: '', overs: 20 });
 
   useEffect(() => { if (user) fetchTournaments(); }, [user]);
@@ -54,7 +52,7 @@ const ScheduleMatch = () => {
     const newScore: MockMatchScore = { id: `score-${Date.now()}`, match_id: newMatch.id, team_a_runs: 0, team_a_wickets: 0, team_a_overs: 0, team_b_runs: 0, team_b_wickets: 0, team_b_overs: 0, current_batting_team_id: null, ball_by_ball: [], updated_at: new Date().toISOString() };
     setStoredData('mock_scores', [...allScores, newScore]);
     toast({ title: 'Success', description: 'Match scheduled successfully' });
-    router.push('/matches');
+    navigate('/matches');
     setLoading(false);
   };
 
@@ -63,7 +61,7 @@ const ScheduleMatch = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-8 pt-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
-          <button onClick={() => router.back()} className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"><ChevronLeft className="w-4 h-4" />Back</button>
+          <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"><ChevronLeft className="w-4 h-4" />Back</button>
           <div className="bg-card border border-border rounded-2xl p-8">
             <h1 className="font-display text-4xl mb-2">SCHEDULE MATCH</h1>
             <p className="text-muted-foreground mb-8">Create a new match between two teams</p>

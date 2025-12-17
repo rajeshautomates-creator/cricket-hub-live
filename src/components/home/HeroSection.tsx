@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Play, Zap, Trophy, Users } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -12,7 +12,7 @@ const HeroSection = () => {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
       </div>
-
+      
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
@@ -50,7 +50,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            The ultimate cricket scoring platform. Manage tournaments, track live scores,
+            The ultimate cricket scoring platform. Manage tournaments, track live scores, 
             and never miss a moment of the action.
           </motion.p>
 
@@ -62,13 +62,13 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Button variant="hero" size="xl" asChild>
-              <Link href="/signup">
+              <Link to="/signup">
                 <Play className="w-5 h-5" />
                 Start Free Trial
               </Link>
             </Button>
             <Button variant="outline" size="xl" asChild>
-              <Link href="/matches">View Live Matches</Link>
+              <Link to="/matches">View Live Matches</Link>
             </Button>
           </motion.div>
 

@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -58,7 +56,7 @@ const SuperAdminSettings = () => {
 
   const handleSave = async () => {
     setSaving(true);
-
+    
     // Check if record exists
     const { data: existing } = await supabase
       .from('payment_settings')
@@ -121,7 +119,7 @@ const SuperAdminSettings = () => {
       <header className="border-b border-border bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/superadmin">
+            <Link to="/superadmin">
               <Button variant="ghost" size="icon">
                 <ArrowLeft className="w-5 h-5" />
               </Button>

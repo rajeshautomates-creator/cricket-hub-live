@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +73,7 @@ const Tournaments = () => {
             </div>
             {isAdmin && (
               <Button variant="hero" asChild>
-                <Link href="/dashboard/tournaments/new">
+                <Link to="/dashboard/tournaments/new">
                   <Plus className="w-5 h-5 mr-2" />
                   Create Tournament
                 </Link>
@@ -131,7 +129,7 @@ const Tournaments = () => {
               </p>
               {isAdmin && (
                 <Button variant="hero" asChild>
-                  <Link href="/dashboard/tournaments/new">
+                  <Link to="/dashboard/tournaments/new">
                     <Plus className="w-5 h-5 mr-2" />
                     Create Tournament
                   </Link>
@@ -148,7 +146,7 @@ const Tournaments = () => {
                   transition={{ delay: index * 0.05 }}
                   className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-all"
                 >
-                  <Link href={`/tournaments/${tournament.id}`}>
+                  <Link to={`/tournaments/${tournament.id}`}>
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center">
                         {tournament.logo_url ? (

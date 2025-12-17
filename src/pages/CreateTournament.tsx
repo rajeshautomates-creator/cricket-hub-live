@@ -1,9 +1,6 @@
-"use client";
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,7 +20,7 @@ const CreateTournament = () => {
   const [oversFormat, setOversFormat] = useState('20');
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,14 +44,14 @@ const CreateTournament = () => {
     setStoredData('mock_tournaments', [...allTournaments, newTournament]);
     setLoading(false);
     toast({ title: 'Success', description: 'Tournament created successfully!' });
-    router.push('/tournaments');
+    navigate('/tournaments');
   };
 
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-card border-b border-border p-4">
         <div className="container mx-auto flex items-center gap-4">
-          <Button variant="ghost" size="icon" asChild><Link href="/dashboard"><ArrowLeft className="w-5 h-5" /></Link></Button>
+          <Button variant="ghost" size="icon" asChild><Link to="/dashboard"><ArrowLeft className="w-5 h-5" /></Link></Button>
           <div><h1 className="font-display text-xl">CREATE TOURNAMENT</h1><p className="text-sm text-muted-foreground">Set up a new cricket tournament</p></div>
         </div>
       </header>

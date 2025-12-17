@@ -1,9 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -33,18 +30,17 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
-import {
-  getStoredData,
+import { 
+  getStoredData, 
   setStoredData,
-  MockPlayer,
+  MockPlayer, 
   MockTeam,
-  initialPlayers,
-  initialTeams
+  initialPlayers, 
+  initialTeams 
 } from '@/lib/mockData';
 
 const Players = () => {
-  const params = useParams();
-  const teamId = params?.teamId as string;
+  const { teamId } = useParams();
   const [players, setPlayers] = useState<MockPlayer[]>([]);
   const [team, setTeam] = useState<MockTeam | null>(null);
   const [loading, setLoading] = useState(true);
@@ -160,7 +156,7 @@ const Players = () => {
         >
           {/* Back Button */}
           <Link
-            href="/teams"
+            to="/teams"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -317,7 +313,7 @@ const Players = () => {
                   </div>
 
                   <h3 className="font-display text-xl mb-2">{player.name}</h3>
-
+                  
                   <div className="flex justify-center gap-2 mb-4">
                     <Badge className={getRoleBadge(player.role)}>
                       {player.role || 'Player'}

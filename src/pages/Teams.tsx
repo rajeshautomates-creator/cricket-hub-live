@@ -1,9 +1,6 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -35,13 +32,13 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
-import {
-  getStoredData,
+import { 
+  getStoredData, 
   setStoredData,
-  MockTeam,
+  MockTeam, 
   MockTournament,
   MockPlayer,
-  initialTeams,
+  initialTeams, 
   initialTournaments,
   initialPlayers
 } from '@/lib/mockData';
@@ -58,7 +55,7 @@ const Teams = () => {
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedTournament, setSelectedTournament] = useState<string>('all');
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { isAdmin, user } = useAuth();
   const { toast } = useToast();
 
@@ -81,9 +78,8 @@ const Teams = () => {
     const allTournaments = getStoredData<MockTournament[]>('mock_tournaments', initialTournaments)
       .filter(t => t.admin_id === user?.id);
     setTournaments(allTournaments);
-
-    // Check if searchParams is available (it might be null during SSR or initial render in some contexts)
-    const tournamentParam = searchParams?.get('tournament');
+    
+    const tournamentParam = searchParams.get('tournament');
     if (tournamentParam) {
       setSelectedTournament(tournamentParam);
       setNewTeam(prev => ({ ...prev, tournament_id: tournamentParam }));
@@ -97,7 +93,7 @@ const Teams = () => {
 
     const allTeams = getStoredData<MockTeam[]>('mock_teams', initialTeams)
       .filter(t => tournamentIds.includes(t.tournament_id));
-
+    
     const allPlayers = getStoredData<MockPlayer[]>('mock_players', initialPlayers);
 
     const teamsWithDetails = allTeams.map(team => {
@@ -303,7 +299,7 @@ const Teams = () => {
               <Users className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="font-display text-2xl mb-2">NO TEAMS FOUND</h3>
               <p className="text-muted-foreground mb-6">
-                {tournaments.length === 0
+                {tournaments.length === 0 
                   ? 'Create a tournament first, then add teams'
                   : 'Add teams to your tournaments'}
               </p>
@@ -362,8 +358,8 @@ const Teams = () => {
                   </div>
 
                   <div className="flex items-center justify-between pt-4 border-t border-border">
-                    <Link
-                      href={`/teams/${team.id}/players`}
+                    <Link 
+                      to={`/teams/${team.id}/players`}
                       className="flex items-center gap-2 text-primary hover:underline"
                     >
                       <span className="text-sm font-medium">Manage Players</span>

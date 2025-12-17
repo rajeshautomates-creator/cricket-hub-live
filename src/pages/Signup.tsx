@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,13 +14,13 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUp, user } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
-      router.push('/matches');
+      navigate('/matches');
     }
-  }, [user, router]);
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +45,7 @@ const Signup = () => {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -73,7 +72,7 @@ const Signup = () => {
           className="w-full max-w-md"
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 mb-8">
+          <Link to="/" className="flex items-center gap-2 mb-8">
             <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center">
               <span className="font-display text-2xl text-accent-foreground">C</span>
             </div>
@@ -141,7 +140,7 @@ const Signup = () => {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-
+              
               {/* Password Requirements */}
               <div className="space-y-1 mt-2">
                 {passwordRequirements.map((req) => (
@@ -153,11 +152,11 @@ const Signup = () => {
               </div>
             </div>
 
-            <Button
-              type="submit"
-              variant="hero"
-              size="lg"
-              className="w-full"
+            <Button 
+              type="submit" 
+              variant="hero" 
+              size="lg" 
+              className="w-full" 
               disabled={loading || !allRequirementsMet}
             >
               {loading ? 'Creating Account...' : 'Create Account'}
@@ -165,16 +164,16 @@ const Signup = () => {
 
             <p className="text-xs text-muted-foreground text-center">
               By signing up, you agree to our{" "}
-              <Link href="/terms" className="text-accent hover:underline">Terms of Service</Link>
+              <Link to="/terms" className="text-accent hover:underline">Terms of Service</Link>
               {" "}and{" "}
-              <Link href="/privacy" className="text-accent hover:underline">Privacy Policy</Link>
+              <Link to="/privacy" className="text-accent hover:underline">Privacy Policy</Link>
             </p>
           </form>
 
           {/* Login Link */}
           <p className="text-center text-sm text-muted-foreground mt-8">
             Already have an account?{" "}
-            <Link href="/login" className="text-accent hover:underline font-medium">
+            <Link to="/login" className="text-accent hover:underline font-medium">
               Sign in
             </Link>
           </p>

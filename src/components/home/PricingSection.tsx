@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check, Crown, Users, Eye } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -90,10 +90,11 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`relative rounded-2xl p-8 ${plan.popular
-                  ? "bg-gradient-card border-2 border-accent glow-accent"
+              className={`relative rounded-2xl p-8 ${
+                plan.popular 
+                  ? "bg-gradient-card border-2 border-accent glow-accent" 
                   : "bg-card border border-border"
-                }`}
+              }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -104,8 +105,9 @@ const PricingSection = () => {
               )}
 
               {/* Icon */}
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${plan.popular ? "bg-accent/20 text-accent" : "bg-secondary text-foreground"
-                }`}>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                plan.popular ? "bg-accent/20 text-accent" : "bg-secondary text-foreground"
+              }`}>
                 <plan.icon className="w-7 h-7" />
               </div>
 
@@ -129,7 +131,7 @@ const PricingSection = () => {
 
               {/* CTA */}
               <Button variant={plan.variant} className="w-full" size="lg" asChild>
-                <Link href="/signup">{plan.cta}</Link>
+                <Link to="/signup">{plan.cta}</Link>
               </Button>
             </motion.div>
           ))}

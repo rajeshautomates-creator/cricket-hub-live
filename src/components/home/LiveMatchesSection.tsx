@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import LiveMatchCard from "./LiveMatchCard";
 
 const liveMatches = [
@@ -60,8 +60,8 @@ const LiveMatchesSection = () => {
             </p>
           </div>
           <Button variant="ghost" className="mt-4 md:mt-0 group" asChild>
-            <Link href="/matches">
-              View All Matches
+            <Link to="/matches">
+              View All Matches 
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
